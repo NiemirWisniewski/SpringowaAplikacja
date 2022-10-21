@@ -37,7 +37,7 @@ public class ItemService {
     }
 
     public void delete(Long id) {
-        Item item = itemRepository.findById(id).orElseThrow(() -> new ItemNotFoundException(id));
+        Item item = itemRepository.findById(id).orElseThrow(ItemExceptionSupplier.itemNotFound(id));
         itemRepository.delete(item);
     }
 
@@ -45,6 +45,7 @@ public class ItemService {
         Item item = itemRepository.findById(id).orElseThrow(ItemExceptionSupplier.itemNotFound(id));
         item.setName(itemRequest.getName());
         item.setCost(itemRequest.getCost());
+        itemRepository.save(item);
         return itemMapper.toItemResponse(item);
     }
 }

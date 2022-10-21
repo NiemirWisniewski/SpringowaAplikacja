@@ -29,7 +29,7 @@ public class ItemController {
         return ResponseEntity.status(HttpStatus.OK).body(itemResponseList);
     }
 
-    @PostMapping
+    @PostMapping("/items")
     @ApiOperation("Create Item")
     public ResponseEntity<ItemResponse> createItem(@RequestBody ItemRequest itemRequest){
         ItemResponse itemResponse = itemService.saveItem(itemRequest);
@@ -37,21 +37,21 @@ public class ItemController {
         return ResponseEntity.created(uri).body(itemResponse);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/items/{id}")
     @ApiOperation("Find item")
     public ResponseEntity<ItemResponse> findItem(@PathVariable Long id){
         ItemResponse itemResponse = itemService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(itemResponse);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/items/{id}")
     @ApiOperation("Delete item")
     public ResponseEntity<Void> deleteItem(@PathVariable Long id){
         itemService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/items/{id}")
     @ApiOperation("Update item")
     public ResponseEntity<ItemResponse> updateItem(@PathVariable Long id, @RequestBody ItemRequest itemRequest){
         ItemResponse itemResponse = itemService.update(id, itemRequest);
