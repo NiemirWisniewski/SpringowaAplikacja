@@ -8,8 +8,6 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @MappedSuperclass
-@AllArgsConstructor
-@NoArgsConstructor
 @Getter
 @Setter
 public abstract class AbstractEntity {

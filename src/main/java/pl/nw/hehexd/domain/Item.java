@@ -4,8 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "Item")
@@ -14,6 +13,13 @@ import javax.persistence.Table;
 @AllArgsConstructor
 public class Item extends AbstractEntity{
 
+
+    private Long id;
     private String name;
     private double cost;
+
+    public Item(String name, double cost) {
+        this.name = name;
+        this.cost = cost;
+    }
 }
