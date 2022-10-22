@@ -1,20 +1,17 @@
 package pl.nw.hehexd.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Item")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Item extends AbstractEntity{
 
-
-    private Long id;
+    @Column(length = 255)
     private String name;
     private double cost;
 

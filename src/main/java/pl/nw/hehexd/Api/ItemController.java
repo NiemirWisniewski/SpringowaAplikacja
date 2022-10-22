@@ -10,7 +10,6 @@ import pl.nw.hehexd.Api.request.ItemRequest;
 import pl.nw.hehexd.Api.response.ItemResponse;
 import pl.nw.hehexd.service.ItemService;
 
-import java.awt.event.ItemListener;
 import java.net.URI;
 import java.util.List;
 

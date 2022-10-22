@@ -1,13 +1,21 @@
 package pl.nw.hehexd.domain;
 
-@javax.persistence.Entity
+import lombok.*;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Customer")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Customer extends AbstractEntity{
 
-    private String name;
-    private String surname;
     private String username;
-    private String email;
-    private String address;
+    @Enumerated(EnumType.STRING)
     private Role role;
-
 }
