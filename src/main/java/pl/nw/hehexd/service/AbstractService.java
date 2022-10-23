@@ -12,18 +12,18 @@ import java.util.stream.Collectors;
 
 @MappedSuperclass
 @RequiredArgsConstructor
-public abstract class AbstractService{
+public abstract class AbstractService<E extends AbstractResponse, T extends AbstractRequest, O extends AbstractEntity>{
 
     private final AbstractMapper abstractMapper;
-    private final AbstractRepository abstractRepository;
-    public AbstractResponse saveCustomer(AbstractRequest abstractRequest) {
-        AbstractEntity abstractEntity =  abstractMapper.toAbstractEntity(abstractRequest);
+    private final AbstractRepository<O> abstractRepository;
+    public E saveCustomer(T abstractRequest) {
+        O abstractEntity = (O) abstractMapper.toAbstractEntity(abstractRequest);
         abstractRepository.save(abstractEntity);
-        return abstractMapper.toAbstractResponse(abstractEntity);
+        return (E) abstractMapper.toAbstractResponse(abstractEntity);
     }
 
     public List<AbstractResponse> findAll() {
-        List<AbstractEntity> abstractList = abstractRepository.findAll();
-        return abstractList.stream().map(abstractMapper::toAbstractResponse).collect(Collectors.toList());
+        List<O> abstractList = abstractRepository.findAll();
+        return abstractList.stream().map(x -> abstractMapper.toAbstractResponse(x)).collect(Collectors.toList());
     }
 }

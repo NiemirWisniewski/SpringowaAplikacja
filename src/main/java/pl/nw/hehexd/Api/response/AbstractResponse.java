@@ -8,6 +8,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
 public class AbstractResponse {
 
     private Long id;

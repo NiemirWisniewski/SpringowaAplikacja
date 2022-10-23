@@ -1,5 +1,6 @@
 package pl.nw.hehexd.Api;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,16 +14,16 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @MappedSuperclass
-public abstract class AbstractController {
-    private final AbstractService abstractService;
+public abstract class AbstractController<T extends AbstractResponse, E extends AbstractRequest, O extends AbstractService> {
+    private final O abstractService;
 
-    public ResponseEntity<List<AbstractResponse>> showAllAbstractEntities(){
-        List<AbstractResponse> abstractResponseList = abstractService.findAll();
+    public ResponseEntity<List<T>> showAllAbstractEntities(){
+        List<T> abstractResponseList = (List<T>) abstractService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(abstractResponseList);
     }
 
-    public ResponseEntity<AbstractResponse> abstractCustomer(AbstractRequest abstractRequest){
-        AbstractResponse abstractResponse = abstractService.saveCustomer(abstractRequest);
+    public ResponseEntity<T> abstractCustomer(E abstractRequest){
+        T abstractResponse = (T) abstractService.saveCustomer(abstractRequest);
         URI uri = URI.create("/admin/" + abstractResponse.getId());
         return ResponseEntity.created(uri).body(abstractResponse);
     }

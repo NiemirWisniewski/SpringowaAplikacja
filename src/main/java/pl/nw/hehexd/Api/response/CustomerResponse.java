@@ -1,10 +1,13 @@
 package pl.nw.hehexd.Api.response;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+
+import lombok.Getter;
+import lombok.Setter;
 import pl.nw.hehexd.domain.Role;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 public class CustomerResponse {
 
