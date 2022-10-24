@@ -7,13 +7,13 @@ import pl.nw.hehexd.domain.Role;
 
 @Getter
 @Setter
-public class CustomerRequest {
+public class UserRequest {
 
     private String username;
     private Role role;
 
     @JsonCreator
-    public CustomerRequest(String username, Role role) {
+    public UserRequest(String username, Role role) {
         this.username = username;
         this.role = role;
     }

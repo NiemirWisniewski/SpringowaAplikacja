@@ -6,7 +6,7 @@ import pl.nw.hehexd.domain.Role;
 
 @Data
 @AllArgsConstructor
-public class CustomerResponse {
+public class UserResponse {
 
     private Long id;
     private String username;

@@ -8,12 +8,13 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "User")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends AbstractEntity{
+@ToString
+public class User extends AbstractEntity{
 
     private String username;
     @Enumerated(EnumType.STRING)
