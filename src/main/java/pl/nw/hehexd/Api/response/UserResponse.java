@@ -9,10 +9,11 @@ import pl.nw.hehexd.domain.Role;
 @Getter
 @Setter
 @AllArgsConstructor
-public class CustomerResponse {
+public class UserResponse {
 
     private Long id;
     private String username;
-    private Role role;
+    private String password;
+    private String role;
 
 }

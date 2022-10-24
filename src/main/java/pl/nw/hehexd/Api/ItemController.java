@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pl.nw.hehexd.Api.request.ItemRequest;
 import pl.nw.hehexd.Api.response.ItemResponse;
@@ -17,6 +18,7 @@ import java.util.List;
 @RequestMapping("/admin")
 @Api(tags = "Items")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ADMIN')")
 public class ItemController {
 
     private final ItemService itemService;

@@ -8,14 +8,15 @@ import javax.persistence.Enumerated;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Customer")
+@Table(name = "Users")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends AbstractEntity{
+public class User extends AbstractEntity{
 
     private String username;
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String password;
+    //@Enumerated(EnumType.STRING)
+    private String role;
 }
