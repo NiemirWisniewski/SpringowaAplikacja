@@ -1,4 +1,4 @@
-package pl.nw.hehexd.Api;
+package pl.nw.hehexd.item;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -6,29 +6,26 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.nw.hehexd.Api.request.ItemRequest;
-import pl.nw.hehexd.Api.response.ItemResponse;
-import pl.nw.hehexd.service.ItemService;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/admin")
+@RequestMapping("/api/items")
 @Api(tags = "Items")
 @RequiredArgsConstructor
 public class ItemController {
 
     private final ItemService itemService;
 
-    @GetMapping("/items")
+    @GetMapping()
     @ApiOperation("Show all")
     public ResponseEntity<List<ItemResponse>> getItems(){
         List<ItemResponse> itemResponseList = itemService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(itemResponseList);
     }
 
-    @PostMapping("/items")
+    @PostMapping()
     @ApiOperation("Create Item")
     public ResponseEntity<ItemResponse> createItem(@RequestBody ItemRequest itemRequest){
         ItemResponse itemResponse = itemService.saveItem(itemRequest);
@@ -36,21 +33,21 @@ public class ItemController {
         return ResponseEntity.created(uri).body(itemResponse);
     }
 
-    @GetMapping("/items/{id}")
+    @GetMapping("/{id}")
     @ApiOperation("Find item")
     public ResponseEntity<ItemResponse> findItem(@PathVariable Long id){
         ItemResponse itemResponse = itemService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(itemResponse);
     }
 
-    @DeleteMapping("/items/{id}")
+    @DeleteMapping("/{id}")
     @ApiOperation("Delete item")
     public ResponseEntity<Void> deleteItem(@PathVariable Long id){
         itemService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PutMapping("/items/{id}")
+    @PutMapping("/{id}")
     @ApiOperation("Update item")
     public ResponseEntity<ItemResponse> updateItem(@PathVariable Long id, @RequestBody ItemRequest itemRequest){
         ItemResponse itemResponse = itemService.update(id, itemRequest);

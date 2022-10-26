@@ -1,4 +1,4 @@
-package pl.nw.hehexd.support.exception;
+package pl.nw.hehexd.exception;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

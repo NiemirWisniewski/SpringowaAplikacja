@@ -1,9 +1,9 @@
-package pl.nw.hehexd.support;
+package pl.nw.hehexd.item;
 
 import org.springframework.stereotype.Component;
-import pl.nw.hehexd.Api.request.ItemRequest;
-import pl.nw.hehexd.Api.response.ItemResponse;
-import pl.nw.hehexd.domain.Item;
+import pl.nw.hehexd.item.ItemRequest;
+import pl.nw.hehexd.item.ItemResponse;
+import pl.nw.hehexd.item.Item;
 
 @Component
 public class ItemMapper {

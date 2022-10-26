@@ -1,17 +1,21 @@
-package pl.nw.hehexd.domain;
+package pl.nw.hehexd.item;
 
 import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Item")
+@Table(name = "Items")
 @Getter
 @Setter
 @NoArgsConstructor
 @ToString
-public class Item extends AbstractEntity{
+public class Item{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(unique = true, nullable = false)
+    private Long id;
     @Column(length = 255)
     private String name;
     private double cost;

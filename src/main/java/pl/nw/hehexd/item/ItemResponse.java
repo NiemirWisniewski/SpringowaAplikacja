@@ -1,4 +1,4 @@
-package pl.nw.hehexd.Api.response;
+package pl.nw.hehexd.item;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

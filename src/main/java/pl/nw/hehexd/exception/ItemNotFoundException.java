@@ -1,4 +1,4 @@
-package pl.nw.hehexd.support.exception;
+package pl.nw.hehexd.exception;
 
 public class ItemNotFoundException extends RuntimeException{
 

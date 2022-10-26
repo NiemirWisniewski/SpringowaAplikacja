@@ -1,4 +1,4 @@
-package pl.nw.hehexd.Api.request;
+package pl.nw.hehexd.user;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
@@ -10,11 +10,13 @@ import pl.nw.hehexd.domain.Role;
 public class UserRequest {
 
     private String username;
-    private Role role;
+    private String password;
+    private String role;
 
     @JsonCreator
-    public UserRequest(String username, Role role) {
+    public UserRequest(String username, String password, String role) {
         this.username = username;
+        this.password = password;
         this.role = role;
     }
 }

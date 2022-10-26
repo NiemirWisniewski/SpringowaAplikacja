@@ -1,4 +1,4 @@
-package pl.nw.hehexd.Api.request;
+package pl.nw.hehexd.item;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;

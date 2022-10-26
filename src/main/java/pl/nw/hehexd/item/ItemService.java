@@ -1,13 +1,8 @@
-package pl.nw.hehexd.service;
+package pl.nw.hehexd.item;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import pl.nw.hehexd.Api.request.ItemRequest;
-import pl.nw.hehexd.Api.response.ItemResponse;
-import pl.nw.hehexd.domain.Item;
-import pl.nw.hehexd.repository.ItemRepository;
-import pl.nw.hehexd.support.ItemMapper;
-import pl.nw.hehexd.support.exception.ItemExceptionSupplier;
+import pl.nw.hehexd.exception.ItemExceptionSupplier;
 
 import java.util.List;
 import java.util.stream.Collectors;
