@@ -1,8 +1,6 @@
 package pl.nw.hehexd.user;
 
 import lombok.*;
-import org.springframework.stereotype.Component;
-
 import javax.persistence.*;
 
 @Entity
@@ -18,13 +16,16 @@ public class User{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true, nullable = false)
     private Long id;
+    @Column(unique = true)
     private String username;
+    //@Column(nullable = false)
     private String password;
     //@Enumerated(EnumType.STRING)
     private String role;
 
     public User(String username, String password, String role) {
         this.username = username;
+        this.password = password;
         this.role = role;
     }
 }
@@ -35,5 +36,4 @@ public class User{
         spring.datasource.username=postgres
         spring.datasource.password=postgres
         spring.datasource.driver-class-name=org.postgresql.Driver
-
  */

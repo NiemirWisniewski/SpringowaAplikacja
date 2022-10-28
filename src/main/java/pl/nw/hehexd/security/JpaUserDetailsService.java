@@ -8,13 +8,10 @@ import org.springframework.stereotype.Service;
 import pl.nw.hehexd.user.UserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class JpaUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
-
-    public JpaUserDetailsService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

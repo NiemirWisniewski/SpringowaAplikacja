@@ -27,6 +27,7 @@ public class HehexdApplication {
 		itemRepository.save(new Item("Roma", 200.5));
 
 		userRepository.save(new User("elfik", encoder.encode("hehe") , "ADMIN"));
+		System.out.println(encoder.encode("hehe"));
 		userRepository.save(new User("bartek123", encoder.encode("hehe"), "MOD"));
 		userRepository.save(new User("michaubiałek", encoder.encode("hehe"), "SUPERADMIN"));
 

@@ -14,15 +14,16 @@ public class UserService {
 
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+
     public UserResponse saveCustomer(UserRequest userRequest) {
-        User user =  userMapper.toCustomer(userRequest);
+        User user =  userMapper.toUser(userRequest);
         userRepository.save(user);
-        return userMapper.toCustomerResponse(user);
+        return userMapper.toUserResponse(user);
     }
 
     public List<UserResponse> findAll() {
         List<User> userList = userRepository.findAll();
-        return userList.stream().map(userMapper::toCustomerResponse).collect(Collectors.toList());
+        return userList.stream().map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
     public UserResponse findById(Long id){
