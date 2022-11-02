@@ -1,4 +1,4 @@
-package pl.nw.hehexd.item;
+package pl.nw.hehexd.api;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -6,6 +6,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.nw.hehexd.item.ItemRequest;
+import pl.nw.hehexd.item.ItemResponse;
+import pl.nw.hehexd.item.ItemService;
 
 import java.net.URI;
 import java.util.List;
