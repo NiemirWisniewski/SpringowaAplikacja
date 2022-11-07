@@ -40,7 +40,7 @@ public class HehexdApplication {
 	FilterRegistrationBean filterRegistrationBean(){
 		FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
 		filterRegistrationBean.setFilter(new JwtFilter());
-		filterRegistrationBean.setUrlPatterns(Collections.singleton("/api/item/*"));
+		filterRegistrationBean.setUrlPatterns(Collections.singleton("/api/items/*"));
 		return filterRegistrationBean;
 	}
 }
