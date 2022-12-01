@@ -38,6 +38,7 @@ public class UserService {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a user"));
         user.setUsername(userRequest.getUsername());
         user.setPassword(userRequest.getPassword());
+        user.setEmail(userRequest.getEmail());
         user.setRole(userRequest.getRole());
         userRepository.save(user);
         return userMapper.toUserResponse(user);

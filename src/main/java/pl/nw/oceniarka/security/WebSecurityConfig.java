@@ -11,15 +11,22 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.web.servlet.function.RequestPredicates.headers;
 
 
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     //private final UserAuthenticationProvider userAuthenticationProvider;
-    private final JpaUserDetailsService jpaUserDetailsService;
+    //private final JpaUserDetailsService jpaUserDetailsService;
 
     @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+        return http.csrf().disable().authorizeRequests().anyRequest().permitAll()
+                .and().headers(headers -> headers.frameOptions().sameOrigin()).build();
+    }
+
+    /*@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         //AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
         //authenticationManagerBuilder.authenticationProvider(userAuthenticationProvider);
@@ -53,5 +60,4 @@ public class WebSecurityConfig {
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         .and()
                         .build();*/
-    }
 }
