@@ -2,20 +2,11 @@ package pl.nw.oceniarka;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.event.EventListener;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import pl.nw.oceniarka.comment.Comment;
-import pl.nw.oceniarka.comment.CommentRepository;
-import pl.nw.oceniarka.post.Post;
-import pl.nw.oceniarka.post.PostRepository;
-import pl.nw.oceniarka.user.User;
-import pl.nw.oceniarka.user.UserRepository;
-import pl.nw.oceniarka.user.role.Role;
+import pl.nw.oceniarka.comment.repository.CommentRepository;
+import pl.nw.oceniarka.post.repository.PostRepository;
+import pl.nw.oceniarka.user.repository.UserRepository;
 
 @RequiredArgsConstructor
 @SpringBootApplication

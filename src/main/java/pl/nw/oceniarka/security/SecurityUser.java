@@ -3,7 +3,7 @@ package pl.nw.oceniarka.security;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import pl.nw.oceniarka.user.User;
+import pl.nw.oceniarka.user.domain.User;
 
 import java.util.Collection;
 import java.util.List;
