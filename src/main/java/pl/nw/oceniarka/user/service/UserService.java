@@ -2,6 +2,9 @@ package pl.nw.oceniarka.user.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.nw.oceniarka.exception.userException.EmailIsTakenException;
+import pl.nw.oceniarka.exception.userException.UserExceptionSupplier;
+import pl.nw.oceniarka.exception.userException.UsernameIsTakenException;
 import pl.nw.oceniarka.user.domain.User;
 import pl.nw.oceniarka.user.dto.UserMapper;
 import pl.nw.oceniarka.user.dto.request.UserRequest;
@@ -20,9 +23,19 @@ public class UserService implements UserServiceInterface{
 
     @Override
     public UserResponse saveUser(UserRequest userRequest) {
-        User user =  userMapper.toUser(userRequest);
-        userRepository.save(user);
-        return userMapper.toUserResponse(user);
+
+        boolean usernameIsTaken = userRepository.existsByUsername(userRequest.getUsername());
+
+        boolean emailIsTaken = userRepository.existsByEmail(userRequest.getEmail());
+        if (usernameIsTaken) {
+            throw new UsernameIsTakenException(userRequest.getUsername());
+        } else if (emailIsTaken) {
+            throw new EmailIsTakenException(userRequest.getEmail());
+        } else {
+            User user = userMapper.toUser(userRequest);
+            userRepository.save(user);
+            return userMapper.toUserResponse(user);
+        }
     }
 
     @Override
@@ -33,19 +46,19 @@ public class UserService implements UserServiceInterface{
 
     @Override
     public UserResponse findUserById(Long id){
-            return userMapper.toUserResponse(userRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a user")));
+            return userMapper.toUserResponse(userRepository.findById(id).orElseThrow(UserExceptionSupplier.userNotFound(id)));
     }
 
     @Override
     public void deleteUser(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a user"));
+        User user = userRepository.findById(id).orElseThrow(UserExceptionSupplier.userNotFound(id));
         userRepository.delete(user);
     }
 
 
     @Override
     public UserResponse updateUser(Long id, UserRequest userRequest) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("There is no such a user"));
+        User user = userRepository.findById(id).orElseThrow(UserExceptionSupplier.userNotFound(id));
         user.setUsername(userRequest.getUsername());
         user.setPassword(userRequest.getPassword());
         user.setEmail(userRequest.getEmail());

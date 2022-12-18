@@ -11,6 +11,6 @@ import java.util.List;
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
 
-    @Query("SELECT c FROM Comment c WHERE c.author=:author")
-    List<Comment> findAllByAuthor(String author);
+    //@Query("SELECT c FROM Comment WHERE c.authorId=:author_id")
+    List<Comment> findAllByAuthor(Long authorId);
 }

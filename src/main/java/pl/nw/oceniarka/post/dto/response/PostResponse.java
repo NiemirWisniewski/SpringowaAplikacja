@@ -15,5 +15,6 @@ public class PostResponse {
     private Long opId;
     private String content;
     private LocalDateTime dateAdded;
-    private Double value;
+
+
 }

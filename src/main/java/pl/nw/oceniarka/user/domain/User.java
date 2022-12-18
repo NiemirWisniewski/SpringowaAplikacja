@@ -1,12 +1,17 @@
 package pl.nw.oceniarka.user.domain;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.Hibernate;
 import pl.nw.oceniarka.comment.domain.Comment;
 import pl.nw.oceniarka.post.domain.Post;
 import pl.nw.oceniarka.user.domain.role.Role;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "users")
@@ -26,6 +31,8 @@ public class User{
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Column(unique = true)
     private String email;
     @OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     private List<Post> posts;
@@ -39,6 +46,15 @@ public class User{
         this.password = password;
         this.role = role;
         this.posts = postList;
+    }
+
+    public User(String username, String password, Role role, String email, List<Post> posts, List<Comment> comments) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.email = email;
+        this.posts = posts;
+        this.comments = comments;
     }
 
     public User(String username, String password, Role role) {
@@ -56,6 +72,19 @@ public class User{
 
     public String getRoleAsString(){
         return this.role.getRole();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        User user = (User) o;
+        return id != null && Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
     }
 }
 

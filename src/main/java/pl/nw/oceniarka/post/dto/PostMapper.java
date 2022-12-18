@@ -19,6 +19,6 @@ public class PostMapper {
     }
 
     public PostResponse toPostResponse(Post post) {
-        return new PostResponse(post.getId(), post.getUser().getId(), post.getContent(), post.getDateAdded(), post.getValue());
+        return new PostResponse(post.getId(), post.getUser().getId(), post.getContent(), post.getDateAdded());
     }
 }

@@ -3,6 +3,7 @@ package pl.nw.oceniarka.comment.dto.request;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import lombok.Getter;
 import lombok.Setter;
+import pl.nw.oceniarka.exception.commentException.WrongRatingException;
 
 @Getter
 @Setter
@@ -16,6 +17,10 @@ public class CommentRequest {
     public CommentRequest(String comment, Long authorId, Double rate) {
         this.comment = comment;
         this.authorId = authorId;
-        this.rate = rate;
+        if (rate > 10.0 || rate <= 0) {
+            throw new WrongRatingException();
+        } else {
+            this.rate = rate;
+        }
     }
 }

@@ -1,5 +1,6 @@
 package pl.nw.oceniarka.user.service;
 
+import pl.nw.oceniarka.user.domain.User;
 import pl.nw.oceniarka.user.dto.request.UserRequest;
 import pl.nw.oceniarka.user.dto.response.UserResponse;
 

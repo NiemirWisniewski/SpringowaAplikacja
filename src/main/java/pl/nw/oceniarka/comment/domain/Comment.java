@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
 import pl.nw.oceniarka.post.domain.Post;
 import pl.nw.oceniarka.user.domain.User;
 
@@ -22,12 +23,12 @@ public class Comment{
     @Column(unique = true, nullable = false)
     private Long id;
 
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToOne(fetch = FetchType.EAGER, cascade = { CascadeType.MERGE })
     @JoinColumn(name = "author_id")
     private User author;
     private String comment;
-    private Double rate = 0.0;
-    @ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    private Double rate;
+    @ManyToOne(cascade = { CascadeType.MERGE }) //removed CascadeType.PERSIST so commandlinerunner in main class could work
     @JoinColumn(name = "post_id")
     private Post post;
 
@@ -36,5 +37,11 @@ public class Comment{
         this.comment = comment;
         this.post = post;
         this.rate = rate;
+    }
+
+    public Comment(User author, String comment, Post post){
+        this.author = author;
+        this.comment = comment;
+        this.post = post;
     }
 }

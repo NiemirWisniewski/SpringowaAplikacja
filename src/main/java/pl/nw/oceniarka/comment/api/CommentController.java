@@ -11,6 +11,7 @@ import pl.nw.oceniarka.comment.dto.response.CommentResponse;
 import pl.nw.oceniarka.comment.service.CommentService;
 
 import java.net.URI;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/comments")
@@ -28,16 +29,16 @@ public class CommentController{
         return ResponseEntity.created(uri).body(commentResponse);
     }
 
-    /*
-    !!Nie działa, coś z baza danych, pewnie jakis problem z baza danych
+
+    //Nie działa, coś z baza danych, pewnie jakis problem z baza danych, Parameter value [user] did not match expected type [pl.nw.oceniarka.user.domain.User (n/a)], Parameter value [1] did not match expected type [pl.nw.oceniarka.user.domain.User (n/a)]
     @GetMapping("/username/{username}")
     @ApiOperation("Show all comments from this author")
     public ResponseEntity<List<CommentResponse>> showAllComments(@PathVariable String username){
-        List<CommentResponse> commentResponseList = commentService.findAll(username);
+        List<CommentResponse> commentResponseList = commentService.findAllAuthorsComments(username);
         return ResponseEntity.status(HttpStatus.OK).body(commentResponseList);
     }
 
-     */
+
 
     @GetMapping("/{id}")
     @ApiOperation("Find comment")

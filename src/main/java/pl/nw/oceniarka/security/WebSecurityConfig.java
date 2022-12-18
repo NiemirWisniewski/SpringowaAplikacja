@@ -2,29 +2,40 @@ package pl.nw.oceniarka.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
-import static org.springframework.http.HttpMethod.GET;
-import static org.springframework.web.servlet.function.RequestPredicates.headers;
 
-
-@EnableWebSecurity
+//@EnableWebSecurity
+@Configuration
 @RequiredArgsConstructor
 public class WebSecurityConfig {
     //private final UserAuthenticationProvider userAuthenticationProvider;
-    //private final JpaUserDetailsService jpaUserDetailsService;
+    private final JpaUserDetailsService jpaUserDetailsService;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        return http.csrf().disable().authorizeRequests().anyRequest().permitAll()
-                .and().headers(headers -> headers.frameOptions().sameOrigin()).build();
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        return http.httpBasic().and().csrf().disable()
+                .authorizeRequests(auth -> auth
+                        .mvcMatchers("/api/comments/**").hasAnyRole("USER", "MOD", "ADMIN")
+                        .mvcMatchers("/api/posts/**").hasAnyRole("ADMIN", "MOD")
+                        .mvcMatchers("/api/users/**").hasAnyRole("ADMIN")
+                        .mvcMatchers("/swagger-ui/#/**").permitAll()
+                        .anyRequest().permitAll())
+                .formLogin(Customizer.withDefaults())
+                .logout(Customizer.withDefaults())
+                .build();
     }
+
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+
 
     /*@Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
