@@ -39,7 +39,7 @@ class UserServiceTest {
     }
 
     @Test
-    void saveUser() {
+    void saveUser() { //sprawdzamy czy userrepository.save jest uzywane przez ansza klase userservice, zakladamy ze usermapper dziala dobrze
         //given
         User user = new User("test", "test", Role.USER, "test");
         UserRequest userRequest = new UserRequest("test", "test", Role.USER, "test");
@@ -51,7 +51,7 @@ class UserServiceTest {
     }
 
     @Test
-    void findAllUser(){
+    void findAllUser(){ //sprawdzamy czy userrepository.userFindall jest uzywane przez ansza klase userservice, zakladamy ze usermapper dziala dobrze
         //when
         userServiceTest.findAllUsers();
         //then
@@ -65,9 +65,7 @@ class UserServiceTest {
 
         BDDMockito.given(userRepositoryTest.existsByUsername(userRequest.getUsername()))
                 .willReturn(true);
-
         //when
-
         //then
         Assertions.assertThatThrownBy(() -> userServiceTest.saveUser(userRequest))
                 .isInstanceOf(UsernameIsTakenException.class)
@@ -77,7 +75,7 @@ class UserServiceTest {
     }
 
     @Test
-    void addUserWithEmailIsTakenExceptionTest(){
+    void addUserWithEmailIsTakenExceptionTest(){ //sprawdzamy czy metoda saveuser wyrzuci exception gdy userrepository poda odpowiednie dane
 
         //given
         UserRequest userRequest = new UserRequest("test", "test", Role.USER,"test");

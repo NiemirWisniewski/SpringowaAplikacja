@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.util.UriComponentsBuilder;
 import pl.nw.oceniarka.user.dto.request.UserRequest;
 import pl.nw.oceniarka.user.dto.response.UserResponse;
 import pl.nw.oceniarka.user.service.UserServiceInterface;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequestMapping("/api/users")
 @Api(tags = "User")
 @RequiredArgsConstructor
+@EnableWebMvc
 public class UserController {
 
     private final UserServiceInterface userService;
@@ -30,9 +33,9 @@ public class UserController {
     @PostMapping
     @ApiOperation("Create user")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest userRequest){
+        UriComponentsBuilder uriComponentsBuilder = UriComponentsBuilder.newInstance();
         UserResponse userResponse = userService.saveUser(userRequest);
-        //URI uri = URI.create("/api/users/" + userResponse.getId());
-        return ResponseEntity.ok().body(userResponse);
+        return ResponseEntity.created(uriComponentsBuilder.path("/api/users/{id}").build(userResponse.getId())).body(userResponse);
     }
 
     @GetMapping("/{id}")

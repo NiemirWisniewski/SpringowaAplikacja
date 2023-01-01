@@ -3,13 +3,11 @@ package pl.nw.oceniarka.user.dto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.nw.oceniarka.user.domain.User;
 import pl.nw.oceniarka.user.domain.role.Role;
 import pl.nw.oceniarka.user.dto.request.UserRequest;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import pl.nw.oceniarka.user.dto.response.UserResponse;
 
 class UserMapperTest {
 
@@ -30,12 +28,21 @@ class UserMapperTest {
         UserRequest userRequest = new UserRequest("test", "test", Role.USER, "test");
         //when
         User user1 = userMapper.toUser(userRequest);
-        assertThat(user).isEqualTo(user1);
-
-
+        user.equals(user1);
     }
 
     @Test
     void toUserResponse() {
+        //given
+        User user = new User("test", passwordEncoder.encode("test"), Role.USER, "test");
+        user.setId(1L);
+        UserResponse userResponse = new UserResponse(1L, "test", "test", Role.USER, "test");
+        //when
+        UserResponse userResponse1 = userMapper.toUserResponse(user);
+        //then
+        userResponse.equals(userResponse1);
+
+
+
     }
 }
